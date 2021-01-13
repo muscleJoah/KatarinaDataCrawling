@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/katarina")
+@RequestMapping("/api/katarina")
 class KatarinaApiController {
 
-    @GetMapping("")
+    @GetMapping
     fun controllerRootDir() =
         " API 메인 페이지 "
 
