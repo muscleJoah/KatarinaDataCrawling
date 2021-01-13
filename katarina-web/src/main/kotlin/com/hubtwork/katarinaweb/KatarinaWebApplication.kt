@@ -1,11 +1,11 @@
-package com.hubtwork.katarinabackend
+package com.hubtwork.katarinaweb
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class KatarinaBackendApplication
+class KatarinaWebApplication
 
 fun main(args: Array<String>) {
-    runApplication<KatarinaBackendApplication>(*args)
+    runApplication<KatarinaWebApplication>(*args)
 }
