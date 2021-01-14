@@ -1,0 +1,60 @@
+div {
+    display: block;
+}
+
+.Logo {
+    width: 100%;
+    border: black 1px solid;
+}
+
+
+.katarina-app {
+    color: red;
+}
+
+.MainView {
+    position: relative;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.Container {
+    position: relative;
+    width: 100%;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    padding: 240px 0px 60px;
+    box-sizing: border-box;
+}
+
+.Container .ContentWrapper {
+    position: relative;
+    margin: 0px auto;
+    max-width: 1920px;
+    width: 85%;
+
+    border: blue 1px solid;
+}
+
+.logo-wrapper {
+    max-width: 320px;
+    margin: 0px auto;
+}
+
+.main_searchContainer {
+    position: relative;
+    max-width: 672px;
+    width: 100%;
+    padding: 36px 0px;
+    margin: 0px auto;
+    
+    z-index: 1;
+}

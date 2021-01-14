@@ -1,0 +1,9 @@
+
+.searchResult_gridLayout {
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    margin-bottom: 22.75rem;
+
+}
