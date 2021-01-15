@@ -7,3 +7,68 @@
     margin-bottom: 22.75rem;
 
 }
+
+.grid_set {
+    grid-column: span 4 / auto;
+}
+
+.search_championWrapper {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.search_championHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to top, rgba(39, 54, 82, 0.3) 0%, rgba(32, 43, 67, 0.3) 100%);
+    box-shadow: rgb(148, 149, 150) 0px -3px inset;
+    border-radius: 5px 5px 0px 0px;
+    padding: 0px 1.5rem;
+    min-height: 56px;
+}
+
+.search_championHeaderLink {
+    display: flex;
+    align-items: center;
+}
+
+.search_championSeasonText {
+    box-sizing: border-box;
+    margin: 0px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.search_svgRightArrow {
+    padding-top: 2px;
+    height: 24px;
+    width: 24px;
+    margin-left: 0.75em;
+
+    display: block;
+    stroke-width: 0;
+}
+
+.search_moreFrame {
+    position: relative;
+    overflow: hidden;
+    padding: 1em 1.5em 1.5em;
+    border-radius: 5px;
+}
+
+.search_moreButton {
+    background: rgb(213, 216, 221);
+    color: rgb(78, 96, 136);
+    border-radius: 5px;
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+}

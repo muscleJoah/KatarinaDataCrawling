@@ -1,0 +1,70 @@
+
+.championStats {
+    margin: 0px;
+    padding: 0.75rem 0px 0px;
+    list-style: none;
+}
+
+.championStat-link {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    padding: 0.75em 1.5em;
+    position: relative;
+    overflow: hidden;
+}
+
+.championStat-iconFrame {
+    width: 36px;
+    height: 36px;
+    max-width: 36px;
+    max-height: 36px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: rgb(19, 28, 46);
+}
+
+.championStat-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.championStat-leftFrame {
+    display: block;
+    margin-left: 0.75em;
+}
+
+.championStat-text {
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.championStat-leftFrame .championStat-text:nth-child(1) {
+    color: rgb(0, 132, 255);
+    font-weight: 700;
+}
+
+.championStat-rightFrame {
+    display: block;
+    margin-left: auto;
+    text-align: left;
+}
+
+.championStat-rightFrame .championStat-text:nth-child(1) {
+    color: rgb(255, 0, 0);
+    font-weight: 700;
+}

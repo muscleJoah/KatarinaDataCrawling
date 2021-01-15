@@ -1,0 +1,239 @@
+
+.summonerCard_profile {
+
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+
+}
+
+.summoner-profile {
+
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 1.25rem 1.5rem 0.25rem;
+
+}
+
+.summoner-profileWrapper {
+
+    position: relative;
+    margin-right: 1rem;
+
+}
+
+.summoner-icon {
+    box-sizing: border-box;
+    position: relative;
+    padding: 2px;
+    height: 3.5rem;
+    width: 3.5rem;
+    background: rgb(52, 63, 87, 0.2);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.icon-imageFrame {
+
+    position: relative;
+    border: 3px solid rgb(32, 43, 67);
+    border-radius: 50%;
+    height: calc(100% - 6px);
+    background-color: rgb(32, 43, 67);
+
+}
+
+.icon-imageFrame img {
+
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0px 0px;
+    border-radius: 50%;
+
+}
+
+.summoner-levelWrapper {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0px;
+    right: -0.25rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    color: #ffffff;
+    background: #000000;
+    border-radius: 50%;
+
+}
+
+.summoner-levelWrapper p{
+
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+}
+
+.summoner-level {
+
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 0.75rem;
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.summoner-name {
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.25px;
+}
+
+.summoner-revisiondate {
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.summoner-tier {
+
+    padding: 1.5rem;
+
+}
+
+.tier-rank {
+
+    display: flex;
+    align-items: center;
+
+}
+
+.tier-info {
+
+    position: relative;
+    margin-top: 0.75rem;
+    
+}
+
+.tier-Boundary {
+    display: block;
+}
+
+.tier-icon {
+
+    align-items: center;
+    display: flex;
+    height: 100%;
+    left: 0px;
+    
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
+}
+
+svg {
+    pointer-events: none;
+    display: block;
+}
+
+.percentage_circle_background {
+
+    stroke: #273552; 
+    stroke-width: 2.6666666666666665;
+    shape-rendering: geometricPrecision;
+
+}
+
+.percentage_circle_winrate {
+    transform: rotate(-88deg); 
+    transform-origin: center center;
+    stroke: #ff0000;
+
+    stroke-width: 4;
+    stroke-linecap: round; 
+    shape-rendering: geometricPrecision;
+}
+
+.tier-icon img{
+    
+    user-select: none;
+
+}
+
+.tier-detail {
+    margin-left: 1rem;
+    color: rgb(229, 235, 239);
+}
+
+.tier-selectTier {
+    white-space: nowrap;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 155px;
+}
+
+.tier-selectTier .sdropdown_Wrapper {
+
+    border-radius: 5px;
+    background: rgb(24, 35, 56);
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 1;
+
+}
+
+.dropdown_padding {
+    height: 36px;
+    line-height: 1;
+    background: transparent;
+    padding-left: 1em;
+    color: rgb(0, 0, 0);
+}
+
+.tier-string {
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px 0px 0.25rem;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 1;
+    font-weight: 700;
+    color: rgb(241, 166, 78);
+}
+
+.tier-sstring {
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: 0.25px;
+}
+
+.tier-winrate {
+
+    margin-left: 0.5rem;
+    color: #000000;
+    font-weight: 900;
+
+}

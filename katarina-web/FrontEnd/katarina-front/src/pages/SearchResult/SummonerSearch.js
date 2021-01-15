@@ -16,14 +16,6 @@ class SummonerSearch extends Component {
                                 <NavTab />
                                 <SearchResultLayout />
                             </div>
-                            오<br/>
-                            오<br/>
-                            오<br/>
-                            오<br/>
-                            오<br/>
-                            오<br/>
-                            오<br/>
-                            오<br/>
 
                         </div>
 

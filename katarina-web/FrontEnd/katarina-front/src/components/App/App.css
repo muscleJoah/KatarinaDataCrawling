@@ -1,11 +1,74 @@
 html {
   width: 100%;
-  height: 100%;
+  margin: 0px;
+  padding: 0px;
   background-color: #ffffff;
+  font-family: "Maison Neue", sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.5;
+  color: #000000;
 }
 
-.App {
-  text-align: center;
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  cursor: default;
+}
+
+header {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*      
+    typography
+    
+    p 태그의 기본 글씨체 
+*/
+p.typography {
+  box-sizing: border-box;
+  padding-top: 2px;
+  margin: 0px;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  letter-spacing: 0.25px;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+div { 
+  display: block;
+}
+
+ol {
+
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+
+}
+
+img {
+  user-select: none;
 }
 
 
