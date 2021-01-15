@@ -3,26 +3,27 @@ import './SearchResultLayout.css'
 
 import SummonerInfo from '../../components/SummonerInfo/SummonerInfo'
 import ChampionHistoryCard from '../../components/ExpandableList/ChampionHistoryCard/ChampionHistoryCard'
+import FriendHistoryCard from '../../components/ExpandableList/FriendHistoryCard/FriendHistoryCard'
 
 const friendrecord_preload = {
     "friend_history" : [
         {
             "summonerName": "도팔",
-            "profileIcon": "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/champion/TwistedFate.png",
+            "profileIcon": "https://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/7.png",
             "win": 7,
             "lose": 4,
             "ratio": 62.4,
         },
         {
             "summonerName": "도팔",
-            "profileIcon": "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/champion/TwistedFate.png",
+            "profileIcon": "https://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/7.png",
             "win": 7,
             "lose": 4,
             "ratio": 62.4,
         },
         {
             "summonerName": "도팔",
-            "profileIcon": "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/champion/TwistedFate.png",
+            "profileIcon": "https://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/7.png",
             "win": 7,
             "lose": 4,
             "ratio": 62.4,
@@ -79,19 +80,22 @@ class SearchResultLayout extends Component {
                                 </svg>
                             </a>
                         </div>
-                        <ChampionHistoryCard items={championrecord_preload}/>
+                        <ChampionHistoryCard items={championrecord_preload} />
                         <div className="search_moreFrame">
                             <a href="#" className="search_moreButton"> 더 보기 </a>
                         </div>
                     </div>
 
                     <div className="search_friendWrapper">
-                        <div className="search_friendWrapper">
+                        <div className="search_friendHeader">
                             <div className="search_friendHeaderText">
                                 <p className="search_friendText">함께 플레이한 유저</p>
                             </div>
                         </div>
-                        
+                        <FriendHistoryCard items={friendrecord_preload} />
+                        <div className="search_moreFrame">
+                            <a href="#" className="search_moreButton"> 더 보기 </a>
+                        </div>
                     </div>
                 </div>
 

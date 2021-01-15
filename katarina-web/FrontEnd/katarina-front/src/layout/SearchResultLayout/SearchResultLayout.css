@@ -12,13 +12,17 @@
     grid-column: span 4 / auto;
 }
 
-.search_championWrapper {
+.search_championWrapper,
+.search_friendWrapper
+{
     background: rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     margin-bottom: 1rem;
 }
 
-.search_championHeader {
+.search_championHeader,
+.search_friendHeader
+{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,12 +33,15 @@
     min-height: 56px;
 }
 
-.search_championHeaderLink {
+.search_championHeaderLink
+{
     display: flex;
     align-items: center;
 }
 
-.search_championSeasonText {
+.search_championSeasonText,
+.search_friendText
+ {
     box-sizing: border-box;
     margin: 0px;
     font-size: 0.875rem;

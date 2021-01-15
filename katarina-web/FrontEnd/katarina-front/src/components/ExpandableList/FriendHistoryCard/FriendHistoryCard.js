@@ -8,26 +8,30 @@ class FriendHistoryCard extends Component {
     render() {
         return (
             <Fragment>
-                <div className="FriendStats">
+                <ol className="FriendStats">
                 {this.props.items.friend_history.map(item => (
                     <Fragment key={item.id}>
-                        <a href="#" className="friendStat-link ">
-                            <div className="friendStat-iconWrapper ">
-                                <img src={item.profileIcon} loading="lazy" className="friendStat-icon"/>
-                                <p className="friendStat-summonerName">{item.summonerName}</p>
-                            </div>
-                            <div className="friendStat-frame">
-                                <p className="friendStat-records stat-column">
-                                    {item.win}승 {item.lose}패
-                                </p>
-                                <p className="friendStat-ratio">
-                                    승률 : {item.ratio}
-                                </p>
-                            </div>
-                        </a>
+                        <li>
+
+                            <a href="#" className="friendStat-link ">
+                                <div className="friendStat-iconWrapper ">
+                                    <img src={item.profileIcon} loading="lazy" className="friendStat-icon"/>
+                                    <p className="friendStat-summonerName friendStat-typography">{item.summonerName}</p>
+                                </div>
+                                <div className="friendStat-frame">
+                                    <p className="friendStat-records stat-column friendStat-typography">
+                                        {item.win}승 {item.lose}패
+                                    </p>
+                                    <p className="friendStat-ratio stat-column friendStat-typography">
+                                        승률 : {item.ratio}
+                                    </p>
+                                </div>
+                            </a>
+
+                        </li>
                     </Fragment>
                 ))}
-                </div>
+                </ol>
             </Fragment>
         )
     }
