@@ -8,7 +8,7 @@
 
 }
 
-.grid_set {
+.grid-Profile {
     grid-column: span 4 / auto;
 }
 
@@ -78,4 +78,48 @@
     text-align: center;
     user-select: none;
     cursor: pointer;
+}
+
+.grid-Match {
+    grid-column: span 8 / auto;
+}
+
+.search_NoticeBanner {
+    display: block;
+    cursor: pointer;
+}
+
+.NoticeBanner-ContentsWrapper {
+
+    align-items: center;
+    background: linear-gradient(to top, rgba(39, 54, 82, 0.3) 0%, rgba(32, 43, 67, 0.3) 100%);
+    /* backgroundimage: "" */
+    background-position: right center;
+    background-repeat: no-repeat;
+    display: flex;
+    padding: 12px 1.5rem;
+}
+
+.NoticeBanner-SquareWrapper {
+
+    margin-bottom: 1rem;
+    border-radius: 5px;
+
+}
+
+.NoticeBanner-Text {
+
+    box-sizing: border-box;
+    margin: 0px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-style: normal;
+
+}
+
+.search_Matches {
+    
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    margin-bottom: 1rem;
 }

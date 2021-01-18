@@ -1,0 +1,77 @@
+.MostPlayed {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1 0%;
+}
+
+.MostPlayed_Container {
+    display: flex;
+    align-items: center;
+}
+
+.MostPlayed_Container:not(:last-of-type) {
+    margin-right: 1rem;
+}
+
+.MostPlayed_Container > .ImageWrapper {
+    width: 36px;
+    height: 36px;
+    max-width: 36px;
+    max-height: 36px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: rgb(19, 28, 46);
+
+    margin-right: 0.75rem;
+}
+
+.MostPlayed_Container > .ImageWrapper > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.MostPlayed_Container > div > .win-Rate {
+    display: flex;
+    align-items: baseline;
+}
+
+.win-Rate .champion_winRate {
+    margin-right: 0.25rem;
+}
+
+.champion_winRate {
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.champion_WinLose {
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 0.75rem;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.champion_KDA {
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-style: normal;
+}

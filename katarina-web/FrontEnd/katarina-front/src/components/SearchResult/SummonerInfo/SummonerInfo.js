@@ -1,6 +1,6 @@
 import react, { Component } from 'react'
 import './SummonerInfo.css'
-import gold from '../../assets/img/Emblem_Gold.png'
+import gold from '../../../assets/img/Emblem_Gold.png'
 
 const img_URL= "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/4450.png";
 const tier_URL = ""

@@ -1,9 +1,50 @@
 import react, { Component } from 'react'
 import './SearchResultLayout.css'
 
-import SummonerInfo from '../../components/SummonerInfo/SummonerInfo'
-import ChampionHistoryCard from '../../components/ExpandableList/ChampionHistoryCard/ChampionHistoryCard'
-import FriendHistoryCard from '../../components/ExpandableList/FriendHistoryCard/FriendHistoryCard'
+import SummonerInfo from '../../components/SearchResult/SummonerInfo/SummonerInfo'
+import ChampionHistoryCard from '../../components/SearchResult/ChampionHistoryCard/ChampionHistoryCard'
+import FriendHistoryCard from '../../components/SearchResult/FriendHistoryCard/FriendHistoryCard'
+
+import MatchHistoryHeader from '../../components/SearchResult/MatchHistoryHeader/MatchHistoryHeader'
+import MatchHistoryList from '../../components/SearchResult/MatchHistoryList/MatchHistoryList'
+
+
+const matchDataList = {
+    "dateDiff" : 1,
+    "records" : [
+        {
+            "championImage" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/champion/TwistedFate.png",
+            "result" : "승",
+            "ranking" : "5th",
+            "kill" : 10,
+            "assist" : 5,
+            "death" : 8,
+            "cs" : 180,
+            "playTime" : 100000,
+            "gameType" : "솔로 랭크",
+            "item" : [
+                {
+                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
+                },
+                {
+                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/301.png",
+                },
+                {
+                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
+                },
+                {
+                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/3011.png",
+                },
+                {
+                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
+                },
+                {
+                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/3011.png",
+                }
+            ]
+        },
+    ]
+}
 
 const friendrecord_preload = {
     "friend_history" : [
@@ -68,7 +109,7 @@ class SearchResultLayout extends Component {
     render() {
         return (
             <div className="searchResult_gridLayout">
-                <div colspan="4" className="grid_set">
+                <div colspan="4" className="grid-Profile">
                     <SummonerInfo/>
                     <div className="search_championWrapper">
                         <div className="search_championHeader">
@@ -99,7 +140,17 @@ class SearchResultLayout extends Component {
                     </div>
                 </div>
 
-                <div colspan="8" >
+                <div colspan="8" className="grid-Match">
+                    <a href="#" className="search_NoticeBanner">
+                        <div className="NoticeBanner-ContentsWrapper NoticeBanner-SquareWrapper">
+                            <p className="NoticeBanner-Text">
+                                [ 공지 ] 카타리나 베타 ver 0.1 오픈
+                            </p>
+                        </div>
+                    </a>
+                    <div className="search_Matches">
+                        <MatchHistoryHeader/>
+                    </div>
 
                 </div>
             </div>
