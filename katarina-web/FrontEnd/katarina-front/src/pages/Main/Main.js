@@ -1,6 +1,6 @@
-import react, { Component } from 'react'
+import { Component } from 'react'
 import './Main.css'
-import Searchbar from '../../components/SearchBar/Searchbar'
+import Searchbar from '../../components/Main/SearchBar/Searchbar'
 import logo from '../../logo.svg'
 
 

@@ -1,4 +1,4 @@
-import react, { Component, Fragment } from 'react'
+import { Component } from 'react'
 import './MatchHistoryHeader.css'
 
 import ChampionRecordView from '../ChampionRecordView/ChampionRecordView'

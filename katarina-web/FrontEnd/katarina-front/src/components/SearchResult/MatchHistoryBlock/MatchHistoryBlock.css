@@ -36,14 +36,14 @@
     position: relative;
     display: flex;
     align-items: center;
-    background: rgb(24, 35, 56);
+    background: linear-gradient(to top, rgba(39, 54, 82, 0.3) 0%, rgba(32, 43, 67, 0.3) 100%);
     border-radius: 5px;
 }
 
 .match_profile_highlight {
     align-self: stretch;
     width: 3px;
-    margin-right: 0.25rem;
+    margin-right: 0.3rem;
     border-radius: 5px 0px 0px 5px;
 
     background: rgb(255, 88, 89);
@@ -54,11 +54,11 @@
     position: relative;
     width: 3.75rem;
     height: 4.25rem;
-    margin-right: 0.25rem;
+    margin-right: 0.3rem;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: rgb(7, 14, 29);
+    background-color: rgb(4, 10, 22);
 }
 
 .MatchHistory-ContentsWrapper .match_profile_LaneIcon {
@@ -93,7 +93,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: 1.25;
-    color: rgb(255, 88, 89);
+    color: rgb(0, 0, 0);
 }
 
 .match-result-ranking {
@@ -101,12 +101,9 @@
     padding-top: 2px;
     margin: 0px;
     font-size: 0.75rem;
+    font-weight: normal;
     font-style: normal;
-    font-weight: 700;
-    display: inline-block;
-    padding-left: 6px;
-    padding-right: 6px;
-    border-radius: 2px;
+    color: rgb(0, 0, 0);
 }
 
 .match-info-title {
@@ -117,7 +114,7 @@
     font-style: normal;
     font-weight: 700;
 
-    color: rgb(253, 0, 0);
+    color: rgb(17, 0, 255);
 }
 
 .match-info-sub {
@@ -127,12 +124,12 @@
     font-size: 0.75rem;
     font-weight: normal;
     font-style: normal;
-    color: rgb(137, 160, 181);
+    color: rgb(0, 0, 0);
 }
 
 .match-items {
+    padding-top: 2px;
     width: 77px;
-    margin: 0 auto;
 }
 
 .match-item {

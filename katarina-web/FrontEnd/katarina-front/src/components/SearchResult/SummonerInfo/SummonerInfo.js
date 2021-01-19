@@ -1,4 +1,4 @@
-import react, { Component } from 'react'
+import { Component } from 'react'
 import './SummonerInfo.css'
 import gold from '../../../assets/img/Emblem_Gold.png'
 

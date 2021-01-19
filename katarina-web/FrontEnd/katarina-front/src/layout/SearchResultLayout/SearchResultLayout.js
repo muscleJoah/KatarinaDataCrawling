@@ -1,4 +1,4 @@
-import react, { Component } from 'react'
+import { Component } from 'react'
 import './SearchResultLayout.css'
 
 import SummonerInfo from '../../components/SearchResult/SummonerInfo/SummonerInfo'
@@ -10,37 +10,42 @@ import MatchHistoryList from '../../components/SearchResult/MatchHistoryList/Mat
 
 
 const matchDataList = {
-    "dateDiff" : 1,
-    "records" : [
+    "matches" : [
         {
-            "championImage" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/champion/TwistedFate.png",
-            "result" : "승",
-            "ranking" : "5th",
-            "kill" : 10,
-            "assist" : 5,
-            "death" : 8,
-            "cs" : 180,
-            "playTime" : 100000,
-            "gameType" : "솔로 랭크",
-            "item" : [
+            "dateDiff" : 1,
+            "dateMatches" : [
                 {
-                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
+                    "championImage" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/champion/TwistedFate.png",
+                    "result" : "승리",
+                    "ranking" : "5th",
+                    "kill" : 10,
+                    "assist" : 5,
+                    "death" : 8,
+                    "cs" : 180,
+                    "playTime" : 1000000,
+                    "team_kill" : 30,
+                    "gameType" : "솔로 랭크",
+                    "userItems" : [
+                        {
+                            "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
+                        },
+                        {
+                            "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/3011.png",
+                        },
+                        {
+                            "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
+                        },
+                        {
+                            "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/3011.png",
+                        },
+                        {
+                            "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
+                        },
+                        {
+                            "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/3011.png",
+                        }
+                    ]
                 },
-                {
-                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/301.png",
-                },
-                {
-                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
-                },
-                {
-                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/3011.png",
-                },
-                {
-                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/2065.png",
-                },
-                {
-                    "imgSrc" : "http://ddragon.leagueoflegends.com/cdn/11.1.1/img/item/3011.png",
-                }
             ]
         },
     ]
@@ -150,6 +155,7 @@ class SearchResultLayout extends Component {
                     </a>
                     <div className="search_Matches">
                         <MatchHistoryHeader/>
+                        <MatchHistoryList items = {matchDataList}/>
                     </div>
 
                 </div>

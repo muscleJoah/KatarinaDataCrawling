@@ -1,6 +1,6 @@
-import react, { Component } from 'react'
+import { Component } from 'react'
 import './Searchbar.css'
-import searchIcon from '../../searchIcon.svg'
+import searchIcon from '../../../searchIcon.svg'
 
 
 class Searchbar extends Component {

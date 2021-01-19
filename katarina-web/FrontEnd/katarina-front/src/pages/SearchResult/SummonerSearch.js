@@ -1,4 +1,4 @@
-import react, {Component} from 'react'
+import {Component} from 'react'
 import './SummonerSearch.css'
 import NavTab from '../../components/NavTab/NavTab'
 import SearchResultLayout from '../../layout/SearchResultLayout/SearchResultLayout'

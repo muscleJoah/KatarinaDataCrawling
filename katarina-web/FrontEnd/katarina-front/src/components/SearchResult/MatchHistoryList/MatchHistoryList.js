@@ -1,5 +1,7 @@
 
-import react, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
+
+import MatchHistoryBlock from '../MatchHistoryBlock/MatchHistoryBlock'
 import './MatchHistoryList.css'
 
 
@@ -10,17 +12,25 @@ class MatchHistoryList extends Component {
 
 
     render() {
+
+        function date_diff(b) {
+
+        }
+
+        function match_divider(match_list) {
+            var json = {};
+            json.matches = [];
+
+            var temp = [];
+        }
+
+
         return (
             <Fragment>
                 <div className="MatchHistory-Container">
-                    <div className="">
                         {this.props.items.matches.map(item => 
-                            <Fragment>
-                                
-
-                            </Fragment>
+                            <MatchHistoryBlock records = {item} />
                             )}
-                    </div>
                 </div>
             </Fragment>
         )
