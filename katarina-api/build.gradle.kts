@@ -20,6 +20,21 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    // libs for RestTemplate
+    implementation("org.springframework:spring-web")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")
+
+    // libs for WebClient
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    // libs for Junit
+    implementation("junit:junit:4.12")
+    implementation("junit:junit:4.12")
+    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
