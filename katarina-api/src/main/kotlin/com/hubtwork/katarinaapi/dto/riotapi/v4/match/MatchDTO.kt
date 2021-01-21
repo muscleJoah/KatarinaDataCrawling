@@ -53,4 +53,6 @@ data class MatchDTO(
     var participantIdentities: ArrayList<ParticipantIdentityDTO>      // 소환사 관련 간략 정보 ( 소환사명 아이콘 등 )
 
 )
-
+{
+    fun getStartTime(): Long = gameCreation
+}
