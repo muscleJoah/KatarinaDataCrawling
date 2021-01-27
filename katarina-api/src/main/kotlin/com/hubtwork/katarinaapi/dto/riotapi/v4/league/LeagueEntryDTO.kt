@@ -5,6 +5,7 @@ import kotlin.math.roundToInt
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class LeagueEntryDTO(
+    var leagueId : String?,
     var summonerId: String, // Encrypted Summoner ID
     var summonerName: String,
     var queueType: String,  // 랭크 종류

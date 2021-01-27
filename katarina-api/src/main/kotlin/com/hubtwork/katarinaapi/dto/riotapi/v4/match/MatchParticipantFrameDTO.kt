@@ -9,6 +9,6 @@ data class MatchParticipantFrameDTO(
     var level: Int,             // 레벨
     var xp: Int,                // 경험치
     var currentGold: Int,       // 현재 골드
-    var position: MatchPositionDTO,     // 플레이어 위치
+    var position: MatchPositionDTO?,     // 플레이어 위치
     var jungleMinionsKilled: Int        // 정글 몹 처치 수
 )

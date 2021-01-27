@@ -3,12 +3,13 @@ package com.hubtwork.katarinaapi.service.riot.`interface`
 import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchTimelineDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchlistDTO
+import org.springframework.http.ResponseEntity
 import reactor.core.publisher.Mono
 
 interface MatchV4 {
 
-    fun getMatchById(matchId: String): Mono<MatchDTO>?
-    fun getMatchTimelineById(matchId: String): Mono<MatchTimelineDTO>?
+    fun getMatchById(matchId: Long): MatchDTO
+    fun getMatchTimelineById(matchId: Long) : MatchTimelineDTO?
 
     /**
      * Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.
@@ -21,6 +22,7 @@ interface MatchV4 {
      * @param endIndex Long 종료 인덱스 ( beginIndex ~ endIndex Max range : 100 matches )
      *
      */
-    fun getMatchListByAccountId(encryptedAccountId: String): Mono<MatchlistDTO>?
+    fun getMatchListByAccountId(encryptedAccountId: String):  MatchlistDTO // 일부러 nullable 뻇습니다.
+
 
 }

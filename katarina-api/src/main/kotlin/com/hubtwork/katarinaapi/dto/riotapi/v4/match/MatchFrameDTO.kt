@@ -4,6 +4,6 @@ data class MatchFrameDTO(
 
     var timestamp: Long,
     var participantFrames: Map<String, MatchParticipantFrameDTO> = mapOf(),
-    var events: ArrayList<MatchEventDTO> = arrayListOf()
+    var events: ArrayList<MatchEventDTO>? = arrayListOf()
 
 )

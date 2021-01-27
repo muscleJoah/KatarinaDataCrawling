@@ -10,7 +10,9 @@ package com.hubtwork.katarinaapi.dto.riotapi.v3.champion
 
 data class ChampionInfoDTO(
 
-    var maxNewPlayerLevel: ArrayList<Int>,              // 신규 유저 기준 제한 레벨
+    var freeChampionIds: ArrayList<Int>,                 // 챔피언 로테이션
     var freeChampionIdsForNewPlayers: ArrayList<Int>,   // 신규 유저용 로테이션
-    var freeChampionIds: ArrayList<Int>                 // 챔피언 로테이션
+
+    var maxNewPlayerLevel: Int              // 신규 유저 기준 제한 레벨
 )
+

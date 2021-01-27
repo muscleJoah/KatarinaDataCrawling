@@ -5,6 +5,6 @@ import reactor.core.publisher.Mono
 
 interface LolStatusV4 {
 
-    fun getPlatformStatus(): Mono<PlatformDataDTO>?
+    fun getPlatformStatus(): PlatformDataDTO?
 
 }
