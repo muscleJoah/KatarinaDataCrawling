@@ -12,9 +12,9 @@ import java.util.Scanner
 
 
 @Service
-class DataCrawlingService(private val riotApiService: RiotApiService, private val katarinaApiService: KatarinaApiService)
+class DataCrawling(private val riotApiService: RiotApiService, private val katarinaApiService: KatarinaApiService)
 {
-
+/*
     companion object{
         const val rankedSolo : String = "RANKED_SOLO_5x5"
         const val rankedFlexSR : String = "RANKED_FLEX_SR"
@@ -68,7 +68,7 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
 
             return matchIdList.distinct()
         }
-
+/*
     fun getAccountIdInMatchList (): List<Pair<String, String>> {
         var accountIdList = mutableListOf<Pair<String,String>>()
         val a : Long = 4950904382
@@ -83,8 +83,8 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         println(playerAccountIdList.distinct())
 
         return playerAccountIdList.distinct()
-    }
-
+    }*/
+*/
     }
 
 

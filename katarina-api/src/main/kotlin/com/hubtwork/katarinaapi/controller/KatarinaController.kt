@@ -11,7 +11,7 @@ import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchlistDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.platformdata.PlatformDataDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.summoners.SummonerDTO
 import com.hubtwork.katarinaapi.service.katarina.KatarinaApiService
-import com.hubtwork.katarinaapi.service.riot.DataCrawlingService
+import com.hubtwork.katarinaapi.service.DataCrawling.DataCrawlingService
 import com.hubtwork.katarinaapi.service.riot.RiotApiService
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 @RequestMapping("/api")
 class KatarinaController(private val katarinaApiService: KatarinaApiService , private val riotApiService: RiotApiService , private val dataCrawlingService: DataCrawlingService) {
+
+
 
     @GetMapping("/bozi/{summoner_Name}")
     fun getMatchDetails(@PathVariable("summoner_Name") name: String) =
@@ -41,6 +43,11 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
         return ResponseEntity(rotation, HttpStatus.OK)
     }
 */
+   val challengerLeagueList : LeagueListDTO  = riotApiService.getChallengerLeague(DataCrawlingService.rankedSolo)
+    val grandMasterLeagueList : LeagueListDTO = riotApiService.getGrandMasterLeague(DataCrawlingService.rankedSolo)
+    val masterLeagueList : LeagueListDTO = riotApiService.getGrandMasterLeague(DataCrawlingService.rankedSolo)
+
+
     @GetMapping("/getcham")
     fun getChampionRotationRest(): ResponseEntity<ChampionInfoDTO> {
        val championRotation:ChampionInfoDTO? = riotApiService.getChampionRotations()
@@ -56,13 +63,13 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
 
     @GetMapping("/getgrandmaster/{queue}")
     fun getGrandMasterLeague(@PathVariable("queue") queue:String): ResponseEntity<LeagueListDTO>{
-        val grandmasterleague: LeagueListDTO? = riotApiService.getGrandMasterLeague(queue)
+        val grandmasterleague: LeagueListDTO = riotApiService.getGrandMasterLeague(queue)
         return ResponseEntity(grandmasterleague,HttpStatus.OK)
     }
 
     @GetMapping("/getmaster/{queue}")
     fun getMasterLeague(@PathVariable("queue") queue:String): ResponseEntity<LeagueListDTO>{
-        val masterleague: LeagueListDTO? = riotApiService.getMasterLeague(queue)
+        val masterleague: LeagueListDTO = riotApiService.getMasterLeague(queue)
         return ResponseEntity(masterleague,HttpStatus.OK)
     }
 
@@ -134,29 +141,53 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
     }
 
 
-    @GetMapping("/datacrawlingservice/getchallengerleaguelist")
-    fun getChallengerLeagueList(): ResponseEntity<LeagueListDTO> {
+    @GetMapping("/datacrawlingservice/test/getchallengerleaguelist")
+    fun getChallengerLeagueListTest(): ResponseEntity<LeagueListDTO> {
         val challengerLeagueList : LeagueListDTO = riotApiService.getChallengerLeague("RANKED_SOLO_5x5")
-        dataCrawlingService.getChallengerLeagueSummonerIdList(challengerLeagueList)
+        dataCrawlingService.getChallengerLeagueSummonerIdListTest(challengerLeagueList)
         return ResponseEntity(challengerLeagueList , HttpStatus.OK)
 }
-    @GetMapping("/datacrawlingservice/getaccountidbysummonerid")
-    fun getAccountIdBySummonerIdList(): ResponseEntity<List<Pair<String, String>>> {
-        val summonerIdList : List<Pair<String,String>> = dataCrawlingService.getAccountIdBySummonerIdList()
+    @GetMapping("/datacrawlingservice/test/getaccountidbysummonerid")
+    fun getAccountIdBySummonerIdListTest(): ResponseEntity<List<Pair<String, String>>> {
+        val summonerIdList : List<Pair<String,String>> = dataCrawlingService.getAccountIdBySummonerIdListTest()
         return ResponseEntity(summonerIdList, HttpStatus.OK)
     }
 
-    @GetMapping("/datacrawlingservice/getmatchbyaccountidlist")
-    fun getMatchByAccountIdList (): ResponseEntity<List<Long>> {
-        var matchList : List<Long> = dataCrawlingService.getMatchByAccountIdList()
+    @GetMapping("/datacrawlingservice/test/getmatchbyaccountidlist")
+    fun getMatchByAccountIdListTest (): ResponseEntity<List<Long>> {
+        var matchList : List<Long> = dataCrawlingService.getMatchByAccountIdListTest()
         return ResponseEntity(matchList,HttpStatus.OK)
 
     }
 
-    @GetMapping("/datacrawlingservice/getaccountidinmatchlist")
-    fun getAccountInMatchList(): ResponseEntity<List<Pair<String, String>>> {
-        var accountList : List<Pair<String, String>> = dataCrawlingService.getAccountIdInMatchList()
+    @GetMapping("/datacrawlingservice/test/getaccountidinmatchlist")
+    fun getAccountInMatchListTest(): ResponseEntity<List<Pair<String, String>>> {
+        var accountList : List<Pair<String, String>> = dataCrawlingService.getAccountIdInMatchListTest()
         return ResponseEntity(accountList,HttpStatus.OK)
+    }
+
+
+    @GetMapping("datacrawlingserivce/getleaguelist")
+    fun getLeagueSummonerList(): ResponseEntity<LeagueListDTO> {
+        dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList)
+        return ResponseEntity(challengerLeagueList, HttpStatus.OK)
+    }
+
+
+    @GetMapping("dataccrawlingservice/getaccountidlist")
+    fun getAccountIdListBySummonerId() {
+        dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList))
+    }
+
+
+    @GetMapping("datacrawlingservice/getmatchlist")
+    fun getMatchListByAccountId(){
+        dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList)))
+    }
+
+    @GetMapping("datacrawlingservice/getuserlistinmatch")
+    fun getUserListInMatch(){
+        dataCrawlingService.getUserInfoInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList))))
     }
 }
 

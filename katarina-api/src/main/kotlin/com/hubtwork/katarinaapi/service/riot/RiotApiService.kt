@@ -88,13 +88,13 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
     override fun getChallengerLeague(queue : String) : LeagueListDTO = //일부러 nullable 불가능하게 만들었음.
         restTemplate.getForObject("https://$platform$challenger_league$queue", LeagueListDTO::class)
 
-    override fun getGrandMasterLeague(queue : String) : LeagueListDTO?=
+    override fun getGrandMasterLeague(queue : String) : LeagueListDTO=
         restTemplate.getForObject("https://$platform$grandmaster_league$queue", LeagueListDTO::class)
 
-    override fun getMasterLeague(queue : String) : LeagueListDTO?=
+    override fun getMasterLeague(queue : String) : LeagueListDTO=
         restTemplate.getForObject("https://$platform$master_league$queue", LeagueListDTO::class)
 
-    override fun getAllLeague(queue: String , tier : String , division: String) : ResponseEntity<ArrayList<LeagueEntryDTO>>? =
+    override fun getAllLeague(queue: String , tier : String , division: String) : ResponseEntity<ArrayList<LeagueEntryDTO>> =
         restTemplate.exchange("https://$platform$leagueEntry_by_param$queue/$tier/$division",HttpMethod.GET,null,
             typeReference<ArrayList<LeagueEntryDTO>>())
 
