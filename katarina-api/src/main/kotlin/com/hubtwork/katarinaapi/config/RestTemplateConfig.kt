@@ -21,14 +21,14 @@ class RestTemplateConfig(private val restTemplateBuilder: RestTemplateBuilder) {
 
     private fun createFactory() : ClientHttpRequestFactory {
         var factory = HttpComponentsClientHttpRequestFactory()
-        factory.setConnectTimeout(2000)
-        factory.setReadTimeout(2000)    // read timeout
+        factory.setConnectTimeout(20000)
+        factory.setReadTimeout(20000)    // read timeout
 
         var httpClient = HttpClientBuilder.create()
             .setMaxConnPerRoute(50) // Connection pool on Route
             .setMaxConnTotal(300)   // Connection pool : Max Connection Pool
             // Idle Connection Shutdown on periodically, Killed unused connection on keep-alive time.
-            .evictIdleConnections(2000L, TimeUnit.MILLISECONDS)
+            .evictIdleConnections(20000L, TimeUnit.MILLISECONDS)
             .build()
         factory.httpClient = httpClient
         return factory

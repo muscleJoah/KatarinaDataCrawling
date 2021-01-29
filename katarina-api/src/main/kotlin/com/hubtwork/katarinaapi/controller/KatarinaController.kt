@@ -1,6 +1,7 @@
 package com.hubtwork.katarinaapi.controller
 
 import com.hubtwork.katarinaapi.config.WebClientConfig
+import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v3.champion.ChampionInfoDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.league.LeagueEntryDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.league.LeagueItemDTO
@@ -186,10 +187,13 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
     }
 
     @GetMapping("datacrawlingservice/getuserlistinmatch")
-    fun getUserListInMatch(){
-        dataCrawlingService.getUserInfoInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList))))
+    fun getUserListInMatch(): ResponseEntity<List<UserDTO>> {
+        var temp : List<UserDTO> = dataCrawlingService.getUserInfoInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList))))
+        return ResponseEntity(temp, HttpStatus.OK)
+
     }
 }
+
 
 
 

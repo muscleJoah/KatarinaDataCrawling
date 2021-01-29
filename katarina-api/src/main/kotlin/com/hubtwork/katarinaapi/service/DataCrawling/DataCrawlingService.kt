@@ -2,6 +2,7 @@ package com.hubtwork.katarinaapi.service.DataCrawling
 
 import com.google.gson.Gson
 import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserDTO
+import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserWithMatchDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.league.LeagueListDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchlistDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.match.ParticipantIdentityDTO
@@ -11,11 +12,12 @@ import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.reactive.function.client.WebClient
 import java.util.Scanner
+import com.hubtwork.katarinaapi.service.DataCrawling.Interface.DataCrawling
 
 
 
 @Service
-class DataCrawlingService(private val riotApiService: RiotApiService, private val katarinaApiService: KatarinaApiService) {
+class DataCrawlingService(private val riotApiService: RiotApiService, private val katarinaApiService: KatarinaApiService) :DataCrawling {
 
     companion object {
 
@@ -109,7 +111,7 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
 *
 
  */
-    fun getLeagueSummonerIdList(leagueTierList: LeagueListDTO): MutableList<String> {
+    override fun getLeagueSummonerIdList(leagueTierList: LeagueListDTO): MutableList<String> {
         var summonerIdList = mutableListOf<String>()// summoner Id 저장용 List
         leagueTierList.entries.forEach {
             summonerIdList.add(it.summonerId)
@@ -118,7 +120,7 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         return summonerIdList
     }
 
-    fun getAccountIdBySummonerIdList(summonerIdList: List<String>): MutableList<String> {
+    override fun getAccountIdBySummonerIdList(summonerIdList: List<String>): MutableList<String> {
         var accountIdList = mutableListOf<String>()//AccountId 저장용 LIst
         summonerIdList.forEach {
             accountIdList.add(riotApiService.getSummonerBySummonerId(it).accountId) //account id, summoner name 쌍으로 저장.
@@ -127,11 +129,12 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         return accountIdList
     }
 
-    fun getMatchByAccountIdList(accountIdList : List<String>): List<Long> {
+    override fun getMatchByAccountIdList(accountIdList : List<String>): List<Long> {
         var matchIdList = mutableListOf<Long>()
         accountIdList.forEach{
             riotApiService.getMatchListByAccountId(it).matches.forEach{
                 matchIdList.add(it.gameId)
+                Thread.sleep(1000)
             }
         }
       // matchIdList.distinct().forEach{println(it)
@@ -141,9 +144,9 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
 
     }
 
-    fun getUserInfoInMatchList(matchIdList: List<Long>): MutableList<UserDTO> {
+    override fun getUserInfoInMatchList(matchIdList: List<Long>): List<UserDTO> {
 
-        val exMatchId : Long = 4940168480
+      //  val exMatchId : Long = 4940168480
         var usersInMatch = mutableListOf<UserDTO>()
         matchIdList.forEach {
             var players: MutableList<ParticipantIdentityDTO> = riotApiService.getMatchById(it).participantIdentities
@@ -151,16 +154,42 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
             players.forEach {
                 var temp: UserDTO = UserDTO(it.player.summonerName, it.player.summonerId, it.player.accountId, it.player.platformId)
                 usersInMatch.add(temp)
-                Thread.sleep(1000)
-                println(temp)
+                Thread.sleep(1200)
             }
         }
+        println("끝끝끝끝끝끝끄튺튺ㅌ끝끄튺튺튺튺트끝끄튺트끝끄튺튺ㅌ끄튺튺끝끝끝끄튺튺튺끝끝끝끝끝끝ㄲ끝")
+        return usersInMatch.distinct()
+        }
 
-        return usersInMatch
+    override fun getUserWithMatchInMatchList(matchIdList: List<Long>) : List<UserWithMatchDTO>{
+
+        var userWithMatch = mutableListOf<UserWithMatchDTO>()
+        matchIdList.forEach{
+            var temp : UserWithMatchDTO
+            var participantIds = mutableListOf<String>()
+            var players : MutableList<ParticipantIdentityDTO> = riotApiService.getMatchById(it).participantIdentities
+
+            players.forEach{
+                participantIds.add(it.player.accountId)
+            }
+            userWithMatch.add(UserWithMatchDTO(it, participantIds))
+        }
+        return userWithMatch.distinct()
+    }
+
+
+    override fun getMatchListByUserInfo(usersInMatch : List<UserDTO>): List<Long> { // List<UserDTO>에서 매치리스트 뽑아오는 함수>
+        var accountIdList = mutableListOf<String>()
+        val matchIdList : List<Long>
+
+        usersInMatch.forEach{
+            accountIdList.add(it.accountId)
         }
 
 
+        return getMatchByAccountIdList(accountIdList)
 
+    }
 }
 
 
