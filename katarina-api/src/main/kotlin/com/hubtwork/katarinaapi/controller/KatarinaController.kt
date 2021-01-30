@@ -2,6 +2,7 @@ package com.hubtwork.katarinaapi.controller
 
 import com.hubtwork.katarinaapi.config.WebClientConfig
 import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserDTO
+import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserWithMatchDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v3.champion.ChampionInfoDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.league.LeagueEntryDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.league.LeagueItemDTO
@@ -11,6 +12,7 @@ import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchTimelineDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchlistDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.platformdata.PlatformDataDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.summoners.SummonerDTO
+import com.hubtwork.katarinaapi.service.DataCrawling.DataCrawling
 import com.hubtwork.katarinaapi.service.katarina.KatarinaApiService
 import com.hubtwork.katarinaapi.service.DataCrawling.DataCrawlingService
 import com.hubtwork.katarinaapi.service.riot.RiotApiService
@@ -25,8 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 @RequestMapping("/api")
-class KatarinaController(private val katarinaApiService: KatarinaApiService , private val riotApiService: RiotApiService , private val dataCrawlingService: DataCrawlingService) {
-
+class KatarinaController(private val katarinaApiService: KatarinaApiService , private val riotApiService: RiotApiService , private val dataCrawlingService: DataCrawlingService ,  private val dataCrawling: DataCrawling){
 
 
     @GetMapping("/bozi/{summoner_Name}")
@@ -162,8 +163,8 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
     }
 
     @GetMapping("/datacrawlingservice/test/getaccountidinmatchlist")
-    fun getAccountInMatchListTest(): ResponseEntity<List<Pair<String, String>>> {
-        var accountList : List<Pair<String, String>> = dataCrawlingService.getAccountIdInMatchListTest()
+    fun getAccountInMatchListTest(): ResponseEntity<List<Pair<String, String?>>> {
+        var accountList : List<Pair<String, String?>> = dataCrawlingService.getAccountIdInMatchListTest()
         return ResponseEntity(accountList,HttpStatus.OK)
     }
 
@@ -184,13 +185,29 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
     @GetMapping("datacrawlingservice/getmatchlist")
     fun getMatchListByAccountId(){
         dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList)))
+        //dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(summonerIdList))
     }
 
     @GetMapping("datacrawlingservice/getuserlistinmatch")
     fun getUserListInMatch(): ResponseEntity<List<UserDTO>> {
-        var temp : List<UserDTO> = dataCrawlingService.getUserInfoInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList))))
+        val summonerIdList : List<String> = listOf("qidG3GqBtFuYiIxpH7ub9A0jUbH79-lhPJhFO5oDaZRIfDo")
+
+
+        //var temp : List<UserDTO> = dataCrawlingService.getUserInfoInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList))))
+        var temp : List<UserDTO> = dataCrawlingService.getUserInfoInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(summonerIdList)))
         return ResponseEntity(temp, HttpStatus.OK)
 
+
+
+
+    }
+
+    @GetMapping("datacrawlingservice/datacrawling")
+    fun dataCrawling(){
+        var userWithMatch = mutableListOf<UserWithMatchDTO>()
+        var userInfos= mutableListOf<UserDTO>()
+
+        dataCrawling.dataCrawling( userInfos ,userWithMatch, false)
     }
 }
 

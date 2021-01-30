@@ -2,7 +2,9 @@ package com.hubtwork.katarinaapi.service.DataCrawling
 
 import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserDTO
 import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserWithMatchDTO
+import org.springframework.stereotype.Service
 
+@Service
 class DataCrawling(private val dataCrawlingService: DataCrawlingService ) {
 
 

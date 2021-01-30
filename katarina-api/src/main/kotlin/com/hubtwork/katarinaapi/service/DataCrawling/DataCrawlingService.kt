@@ -88,12 +88,12 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         return matchIdList.distinct()
     }
 
-    fun getAccountIdInMatchListTest(): List<Pair<String, String>> {
-        var accountIdList = mutableListOf<Pair<String, String>>()
+    fun getAccountIdInMatchListTest(): List<Pair<String, String?>> {
+        var accountIdList = mutableListOf<Pair<String, String?>>()
         val a: Long = 4950904382
         val b: Long = 4950950198
         var matchIdList = listOf<Long>(a, b)//getMatchByAccountIdList()
-        var playerAccountIdList = mutableListOf<Pair<String, String>>() // Pair<accountId, summonerName>
+        var playerAccountIdList = mutableListOf<Pair<String, String?>>() // Pair<accountId, summonerName>
         matchIdList.forEach {
             riotApiService.getMatchById(it).participantIdentities.forEach {
                 playerAccountIdList.add(Pair(it.player.accountId, it.player.summonerName))
@@ -125,7 +125,7 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         summonerIdList.forEach {
             accountIdList.add(riotApiService.getSummonerBySummonerId(it).accountId) //account id, summoner name 쌍으로 저장.
         }
-        //accountIdList.forEach{println("응애 $it")}
+        accountIdList.forEach{println("응애 $it")}
         return accountIdList
     }
 
@@ -134,11 +134,12 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         accountIdList.forEach{
             riotApiService.getMatchListByAccountId(it).matches.forEach{
                 matchIdList.add(it.gameId)
-                Thread.sleep(1000)
+                Thread.sleep(100)
+                println(it.gameId)
             }
         }
       // matchIdList.distinct().forEach{println(it)
-       // Thread.sleep(100)}
+      // Thread.sleep(100)}
 
         return matchIdList.distinct() //매치아이디 중복제거해서보내드리겠읍니다..
 
@@ -155,9 +156,10 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
                 var temp: UserDTO = UserDTO(it.player.summonerName, it.player.summonerId, it.player.accountId, it.player.platformId)
                 usersInMatch.add(temp)
                 Thread.sleep(1200)
+                println(temp)
             }
         }
-        println("끝끝끝끝끝끝끄튺튺ㅌ끝끄튺튺튺튺트끝끄튺트끝끄튺튺ㅌ끄튺튺끝끝끝끄튺튺튺끝끝끝끝끝끝ㄲ끝")
+
         return usersInMatch.distinct()
         }
 
