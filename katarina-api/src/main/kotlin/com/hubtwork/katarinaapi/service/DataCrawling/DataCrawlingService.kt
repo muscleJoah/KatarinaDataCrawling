@@ -132,7 +132,19 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
     override fun getMatchByAccountIdList(accountIdList : List<String>): List<Long> {
         var matchIdList = mutableListOf<Long>()
         accountIdList.forEach{
-            riotApiService.getMatchListByAccountId(it).matches.forEach{
+            riotApiService.getMatchListByAccountId(it).matches.filter{
+                it.queue == 325 // ALL_RANDOM
+                        || it.queue == 900    // ALL_RANDOM_URF
+                        || it.queue == 1010   // ALL_RANDOM_URF_SNOW
+                        || it.queue == 430    //BLIND_PICK
+                        || it.queue == 400    // NORMAL DRAFT
+                        || it.queue == 420    // RANKED SOLO
+                        || it.queue == 440    // RANKED FLEX
+                        || it.queue == 76     // URF
+                        ||it.queue == 450     // ARAM
+                        || it.queue == 78     // ARAM ONEFORALL MIRROR MATCH
+                        || it.queue == 920    // ARAM POROKING
+            }.forEach{
                 matchIdList.add(it.gameId)
                 Thread.sleep(100)
                 println(it.gameId)
@@ -153,10 +165,13 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
             var players: MutableList<ParticipantIdentityDTO> = riotApiService.getMatchById(it).participantIdentities
             Thread.sleep(100)
             players.forEach {
+                if(it.player.summonerId == null || it.player.accountId == null || it.player.platformId == null ){}
+                else{
                 var temp: UserDTO = UserDTO(it.player.summonerName, it.player.summonerId, it.player.accountId, it.player.platformId)
                 usersInMatch.add(temp)
                 Thread.sleep(1200)
                 println(temp)
+            }
             }
         }
 
@@ -170,11 +185,15 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
             var temp : UserWithMatchDTO
             var participantIds = mutableListOf<String>()
             var players : MutableList<ParticipantIdentityDTO> = riotApiService.getMatchById(it).participantIdentities
-
+            println("--------$it--------")
             players.forEach{
                 participantIds.add(it.player.accountId)
+                println("${it.player.accountId}")
+                Thread.sleep(1000)
             }
             userWithMatch.add(UserWithMatchDTO(it, participantIds))
+
+
         }
         return userWithMatch.distinct()
     }

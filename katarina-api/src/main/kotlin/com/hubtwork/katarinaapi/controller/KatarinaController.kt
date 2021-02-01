@@ -197,17 +197,23 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
         var temp : List<UserDTO> = dataCrawlingService.getUserInfoInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(summonerIdList)))
         return ResponseEntity(temp, HttpStatus.OK)
 
-
-
-
     }
+
+    @GetMapping("datacrawlingservice/getwiserwithmatch")
+    fun getUserWithMatchInMatchList(): ResponseEntity<List<UserWithMatchDTO>> {
+        val summonerIdList : List<String> = listOf("qidG3GqBtFuYiIxpH7ub9A0jUbH79-lhPJhFO5oDaZRIfDo")
+
+        var temp : List<UserWithMatchDTO> = dataCrawlingService.getUserWithMatchInMatchList(dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(summonerIdList)))
+        return ResponseEntity(temp,HttpStatus.OK)
+    }
+
 
     @GetMapping("datacrawlingservice/datacrawling")
     fun dataCrawling(){
         var userWithMatch = mutableListOf<UserWithMatchDTO>()
         var userInfos= mutableListOf<UserDTO>()
 
-        dataCrawling.dataCrawling( userInfos ,userWithMatch, false)
+        dataCrawling.dataCrawling( userInfos ,userWithMatch, true)
     }
 }
 

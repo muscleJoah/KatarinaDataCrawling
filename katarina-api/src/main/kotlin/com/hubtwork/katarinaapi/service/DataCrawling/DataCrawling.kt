@@ -12,10 +12,14 @@ class DataCrawling(private val dataCrawlingService: DataCrawlingService ) {
 
 
         if (isFirst) {
+            val summonerIdList : List<String> = listOf("qidG3GqBtFuYiIxpH7ub9A0jUbH79-lhPJhFO5oDaZRIfDo")
             val challengerLeagueIdList: MutableList<String> =
                 dataCrawlingService.getLeagueSummonerIdList(dataCrawlingService.challengerLeagueList) // 챌린저리그 summonerId 리스트.
-            val accountIdList: MutableList<String> =
-                dataCrawlingService.getAccountIdBySummonerIdList(challengerLeagueIdList) // summoner Id -> Accouunt Id
+          //  val accountIdList: MutableList<String> =
+          //      dataCrawlingService.getAccountIdBySummonerIdList(challengerLeagueIdList) // summoner Id -> Accouunt Id
+            val accountIdList : MutableList<String> =
+                dataCrawlingService.getAccountIdBySummonerIdList(summonerIdList)
+
             val matchIdList: List<Long> = dataCrawlingService.getMatchByAccountIdList(accountIdList) // matchIdList
 
 
