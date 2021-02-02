@@ -5,7 +5,7 @@ import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserWithMatchDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.league.LeagueListDTO
 
 interface DataCrawling {
-    fun getLeagueSummonerIdList(leagueTierList: LeagueListDTO): MutableList<String>
+    fun getLeagueSummonerIdList(leagueTierList: LeagueListDTO?): MutableList<String>
     fun getAccountIdBySummonerIdList(summonerIdList: List<String>): MutableList<String>
     fun getMatchByAccountIdList(accountIdList : List<String>): List<Long>
     fun getUserInfoInMatchList(matchIdList: List<Long>): List<UserDTO>

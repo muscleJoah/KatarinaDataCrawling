@@ -20,7 +20,7 @@ data class LeagueItemDTO(
     var wins: Int,  // 승리 수
     var losses: Int,    // 패배 수
 
-    var miniSeries: ArrayList<MiniSeriesDTO>? = arrayListOf(),       // 승급전 정보
+    var miniSeries: MiniSeriesDTO?,       // 승급전 정보
 
     // 아래 사항은 개발자 포럼 참고해볼 것
     var veteran: Boolean,           // 장기 계정 여부 ( 현재 리그에서 100판 이상 진행 )

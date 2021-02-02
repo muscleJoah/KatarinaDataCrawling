@@ -50,7 +50,7 @@ data class MatchDTO(
 
     var teams: ArrayList<TeamStatsDTO>,                             // 팀별 요약
     var participants: ArrayList<ParticipantDTO>,        // 소환사 별 게임 내 디테일 정보
-    var participantIdentities: ArrayList<ParticipantIdentityDTO>      // 소환사 관련 간략 정보 ( 소환사명 아이콘 등 )
+    var participantIdentities: ArrayList<ParticipantIdentityDTO>    // 소환사 관련 간략 정보 ( 소환사명 아이콘 등 )
 
 )
 {

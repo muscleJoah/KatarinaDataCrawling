@@ -8,8 +8,8 @@ import reactor.core.publisher.Mono
 
 interface MatchV4 {
 
-    fun getMatchById(matchId: Long): MatchDTO
-    fun getMatchTimelineById(matchId: Long) : MatchTimelineDTO?
+    fun getMatchById(matchId: Long): ResponseEntity<MatchDTO>
+    fun getMatchTimelineById(matchId: Long) : ResponseEntity<MatchTimelineDTO>
 
     /**
      * Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.
@@ -22,7 +22,7 @@ interface MatchV4 {
      * @param endIndex Long 종료 인덱스 ( beginIndex ~ endIndex Max range : 100 matches )
      *
      */
-    fun getMatchListByAccountId(encryptedAccountId: String):  MatchlistDTO // 일부러 nullable 뻇습니다.
+    fun getMatchListByAccountId(encryptedAccountId: String):  ResponseEntity<MatchlistDTO> // 일부러 nullable 뻇습니다.
 
 
 }

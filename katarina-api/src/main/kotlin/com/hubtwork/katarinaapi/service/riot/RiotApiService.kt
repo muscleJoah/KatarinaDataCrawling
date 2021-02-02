@@ -85,38 +85,46 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
     override fun getChampionRotations(): ChampionInfoDTO? =
         restTemplate.getForObject("https://$platform$champion_rotations",ChampionInfoDTO::class)
 
-    override fun getChallengerLeague(queue : String) : LeagueListDTO = //일부러 nullable 불가능하게 만들었음.
-        restTemplate.getForObject("https://$platform$challenger_league$queue", LeagueListDTO::class)
+    override fun getChallengerLeague(queue : String) : ResponseEntity<LeagueListDTO> = //일부러 nullable 불가능하게 만들었음.
+        restTemplate.exchange("https://$platform$challenger_league$queue", HttpMethod.GET, null, typeReference<LeagueListDTO>() )
+        //restTemplate.getForObject("https://$platform$challenger_league$queue", LeagueListDTO::class)
 
-    override fun getGrandMasterLeague(queue : String) : LeagueListDTO=
-        restTemplate.getForObject("https://$platform$grandmaster_league$queue", LeagueListDTO::class)
+    override fun getGrandMasterLeague(queue : String) : ResponseEntity<LeagueListDTO> =
+       restTemplate.exchange("https://$platform$grandmaster_league$queue",HttpMethod.GET,null , typeReference<LeagueListDTO>())
+       //restTemplate.getForObject("https://$platform$grandmaster_league$queue", LeagueListDTO::class)
 
-    override fun getMasterLeague(queue : String) : LeagueListDTO=
-        restTemplate.getForObject("https://$platform$master_league$queue", LeagueListDTO::class)
+    override fun getMasterLeague(queue : String) : ResponseEntity<LeagueListDTO> =
+        restTemplate.exchange("https://$platform$master_league$queue", HttpMethod.GET,null, typeReference<LeagueListDTO>())
+        //restTemplate.getForObject("https://$platform$master_league$queue", LeagueListDTO::class)
 
     override fun getAllLeague(queue: String , tier : String , division: String) : ResponseEntity<ArrayList<LeagueEntryDTO>> =
         restTemplate.exchange("https://$platform$leagueEntry_by_param$queue/$tier/$division",HttpMethod.GET,null,
             typeReference<ArrayList<LeagueEntryDTO>>())
 
-    override fun getLeagueByLeagueId(leagueId: String) : LeagueListDTO? =
-        restTemplate.getForObject("https://$platform$league_by_leagueId$leagueId"  , LeagueListDTO::class)
+    override fun getLeagueByLeagueId(leagueId: String) : ResponseEntity<LeagueListDTO> =
+        restTemplate.exchange("https://$platform$league_by_leagueId$leagueId" ,HttpMethod.GET,null, typeReference<LeagueListDTO>())
+        //restTemplate.getForObject("https://$platform$league_by_leagueId$leagueId"  , LeagueListDTO::class)
 
     override fun getLeagueBySummonerId(encryptedSummonerId: String) : ResponseEntity<ArrayList<LeagueEntryDTO>>? =
         restTemplate.exchange("https://$platform$leagueInfo_by_summonerId$encryptedSummonerId",HttpMethod.GET,null, typeReference<ArrayList<LeagueEntryDTO>>())
 
 
-    override fun getPlatformStatus(): PlatformDataDTO? =
-        restTemplate.getForObject("https://$platform$platform_data" , PlatformDataDTO::class)
+    override fun getPlatformStatus(): ResponseEntity<PlatformDataDTO> =
+        restTemplate.exchange("https://$platform$platform_data", HttpMethod.GET,null, typeReference<PlatformDataDTO>())
+        //restTemplate.getForObject("https://$platform$platform_data" , PlatformDataDTO::class)
 
 
-    override fun getMatchById(matchId: Long) : MatchDTO =
-        restTemplate.getForObject("https://$platform$match_by_matchId$matchId", MatchDTO::class)
+    override fun getMatchById(matchId: Long) : ResponseEntity<MatchDTO> =
+        restTemplate.exchange("https://$platform$match_by_matchId$matchId",HttpMethod.GET,null, typeReference<MatchDTO>())
+        //restTemplate.getForObject("https://$platform$match_by_matchId$matchId", MatchDTO::class)
 
-    override fun getMatchTimelineById(matchId: Long) : MatchTimelineDTO? =
-        restTemplate.getForObject("https://$platform$match_timeline_by_matchId$matchId", MatchTimelineDTO::class)
+    override fun getMatchTimelineById(matchId: Long) : ResponseEntity<MatchTimelineDTO> =
+        restTemplate.exchange("https://$platform$match_timeline_by_matchId$matchId",HttpMethod.GET,null, typeReference<MatchTimelineDTO>())
+        //restTemplate.getForObject("https://$platform$match_timeline_by_matchId$matchId", MatchTimelineDTO::class)
 
-    override fun getMatchListByAccountId(encryptedAccountId: String) : MatchlistDTO =
-        restTemplate.getForObject("https://$platform$match_by_accountId$encryptedAccountId",MatchlistDTO::class)
+    override fun getMatchListByAccountId(encryptedAccountId: String) : ResponseEntity<MatchlistDTO> =
+        restTemplate.exchange("https://$platform$match_by_accountId$encryptedAccountId",HttpMethod.GET,null, typeReference<MatchlistDTO>())
+        //restTemplate.getForObject("https://$platform$match_by_accountId$encryptedAccountId",MatchlistDTO::class)
 
     override fun getSummonerByName(summonerName: String) : SummonerDTO? =
         restTemplate.getForObject("https://$platform$summoner_by_name$summonerName" , SummonerDTO::class)
@@ -124,12 +132,14 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
     override fun getSummonerByPUUID(encryptedPUUID: String) : SummonerDTO? =
             restTemplate.getForObject("https://$platform$summoner_by_puuid$encryptedPUUID" , SummonerDTO::class)
 
-    override fun getSummonerByAccountId(encryptedAccountId: String) : SummonerDTO?=
-        restTemplate.getForObject("https://$platform$summoner_by_account$encryptedAccountId", SummonerDTO::class)
+    override fun getSummonerByAccountId(encryptedAccountId: String) : ResponseEntity<SummonerDTO> =
+        restTemplate.exchange("https://$platform$summoner_by_account$encryptedAccountId",HttpMethod.GET, null, typeReference<SummonerDTO>())
+        //restTemplate.getForObject("https://$platform$summoner_by_account$encryptedAccountId", SummonerDTO::class)
 
 
-    override fun getSummonerBySummonerId(encryptedSummonerId: String) : SummonerDTO =
-        restTemplate.getForObject("https://$platform$summoner_by_summonerId$encryptedSummonerId", SummonerDTO::class)
+    override fun getSummonerBySummonerId(encryptedSummonerId: String) : ResponseEntity<SummonerDTO> =
+        restTemplate.exchange("https://$platform$summoner_by_summonerId$encryptedSummonerId",HttpMethod.GET,null, typeReference<SummonerDTO>())
+        //restTemplate.getForObject("https://$platform$summoner_by_summonerId$encryptedSummonerId", SummonerDTO::class)
 
 
 
