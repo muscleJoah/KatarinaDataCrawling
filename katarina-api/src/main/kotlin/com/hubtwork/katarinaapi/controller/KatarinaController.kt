@@ -216,7 +216,7 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
     @GetMapping("datacrawlingservice/datacrawling")
     fun dataCrawling(){
         var userWithMatch = mutableListOf<UserWithMatchDTO>()
-        var userInfos= mutableListOf<UserDTO>()
+        var userInfos= mutableListOf<UserDTO>()     
 
         dataCrawling.dataCrawling("TRbDETdnv0Prg86D0n5afVUzGZzKM3GqZZA1Kx2VqHk")
     }

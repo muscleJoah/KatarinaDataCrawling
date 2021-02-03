@@ -12,12 +12,14 @@ import com.hubtwork.katarinaapi.dto.riotapi.v4.match.MatchlistDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.platformdata.PlatformDataDTO
 import com.hubtwork.katarinaapi.dto.riotapi.v4.summoners.SummonerDTO
 import com.hubtwork.katarinaapi.service.riot.`interface`.*
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils
 import org.slf4j.LoggerFactory
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.retry.support.RetryTemplate
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
@@ -25,10 +27,13 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.util.UriComponentsBuilder
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.io.IOException
+import java.lang.Exception
+import java.lang.RuntimeException
 import java.time.LocalDateTime
 
 @Service
-class RiotApiService(private val webClient: WebClient, private val gson: Gson , private val restTemplate : RestTemplate)
+class RiotApiService(private val webClient: WebClient, private val gson: Gson , private val restTemplate : RestTemplate, private val retryTemplate: RetryTemplate)
     : ChampionV3, LeagueV4, LolStatusV4, MatchV4, SummonerV4
 {
 
@@ -68,7 +73,7 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
             return header
         }
 
-        private val logger = LoggerFactory.getLogger(WebClientConfig::class.java)
+        private val logger = LoggerFactory.getLogger(RiotApiService::class.java)
 
         fun uriParameterBuilder(params: Map<String, String>): String {
             var uriComponents: UriComponentsBuilder = UriComponentsBuilder.newInstance()
@@ -122,8 +127,12 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
         restTemplate.exchange("https://$platform$match_timeline_by_matchId$matchId",HttpMethod.GET,null, typeReference<MatchTimelineDTO>())
         //restTemplate.getForObject("https://$platform$match_timeline_by_matchId$matchId", MatchTimelineDTO::class)
 
-    override fun getMatchListByAccountId(encryptedAccountId: String) : ResponseEntity<MatchlistDTO> =
-        restTemplate.exchange("https://$platform$match_by_accountId$encryptedAccountId",HttpMethod.GET,null, typeReference<MatchlistDTO>())
+    override fun getMatchListByAccountId(encryptedAccountId: String) : ResponseEntity<MatchlistDTO> {
+        return retryTemplate.execute<ResponseEntity<MatchlistDTO>,Exception>{
+        restTemplate.exchange(
+            "https://$platform$match_by_accountId$encryptedAccountId",HttpMethod.GET, null,typeReference<MatchlistDTO>())
+        }
+    }
         //restTemplate.getForObject("https://$platform$match_by_accountId$encryptedAccountId",MatchlistDTO::class)
 
     override fun getSummonerByName(summonerName: String) : SummonerDTO? =

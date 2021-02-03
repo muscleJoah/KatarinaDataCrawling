@@ -13,11 +13,11 @@ import org.springframework.web.client.RestTemplate
 import org.springframework.web.reactive.function.client.WebClient
 import java.util.Scanner
 import com.hubtwork.katarinaapi.service.DataCrawling.Interface.DataCrawling
-
+import org.springframework.retry.support.RetryTemplate
 
 
 @Service
-class DataCrawlingService(private val riotApiService: RiotApiService, private val katarinaApiService: KatarinaApiService) :DataCrawling {
+class DataCrawlingService(private val riotApiService: RiotApiService, private val katarinaApiService: KatarinaApiService, private val retryTemplate: RetryTemplate) :DataCrawling {
 
     companion object {
 

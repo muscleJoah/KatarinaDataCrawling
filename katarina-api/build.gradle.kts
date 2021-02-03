@@ -35,6 +35,9 @@ dependencies {
     implementation("junit:junit:4.12")
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
 
+
+    implementation("org.springframework.retry:spring-retry")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

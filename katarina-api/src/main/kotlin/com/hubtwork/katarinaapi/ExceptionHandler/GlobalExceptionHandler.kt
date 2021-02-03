@@ -1,10 +1,12 @@
 package com.hubtwork.katarinaapi.ExceptionHandler
 
 import org.springframework.http.HttpStatus
+import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.*
 import java.lang.Exception
 import java.lang.RuntimeException
 import kotlin.math.log
+
 
 
 @RestControllerAdvice
@@ -14,5 +16,6 @@ class GlobalExceptionHandler {
     fun exception404(e : RuntimeException): String {
         return "404 NOT FOUND \ncheck URI again "
     }
+
 
 }
