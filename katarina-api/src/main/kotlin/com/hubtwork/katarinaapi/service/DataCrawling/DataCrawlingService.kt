@@ -73,6 +73,8 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         return accountIdArray
     }
 
+
+
     fun getMatchByAccountIdListTest(): List<Long> {
         val accountIdArray: List<Pair<String, String>> = getAccountIdBySummonerIdListTest()
         var matchIdList = mutableListOf<Long>()
@@ -128,6 +130,28 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         }
         accountIdList.forEach{println("응애 $it")}
         return accountIdList
+    }
+
+    override fun getMatchByAccountId(accountId : String): List<Long> {
+        var matchIdList = mutableListOf<Long>()
+        riotApiService.getMatchListByAccountId(accountId).body!!.matches.filter{
+            it.queue == 325 // ALL_RANDOM
+                    || it.queue == 900    // ALL_RANDOM_URF
+                    || it.queue == 1010   // ALL_RANDOM_URF_SNOW
+                    || it.queue == 430    //BLIND_PICK
+                    || it.queue == 400    // NORMAL DRAFT
+                    || it.queue == 420    // RANKED SOLO
+                    || it.queue == 440    // RANKED FLEX
+                    || it.queue == 76     // URF
+                    || it.queue == 450     // ARAM
+                    || it.queue == 78     // ARAM ONEFORALL MIRROR MATCH
+                    || it.queue == 920    // ARAM POROKING
+        }.forEach{
+            matchIdList.add(it.gameId)
+            Thread.sleep(100)
+            println(it.gameId)
+        }
+        return matchIdList.distinct()
     }
 
     override fun getMatchByAccountIdList(accountIdList : List<String>): List<Long> {
@@ -189,6 +213,7 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
             var players : MutableList<ParticipantIdentityDTO> = riotApiService.getMatchById(it).body!!.participantIdentities
             println("--------$it--------")
             players.forEach{
+                if(it.player.accountId != null)
                 participantIds.add(it.player.accountId)
                 println("${it.player.accountId}")
                 Thread.sleep(1000)

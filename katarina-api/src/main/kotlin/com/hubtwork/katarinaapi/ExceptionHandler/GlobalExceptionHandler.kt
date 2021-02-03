@@ -1,17 +1,18 @@
 package com.hubtwork.katarinaapi.ExceptionHandler
 
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.ControllerAdvice
-import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.lang.Exception
+import java.lang.RuntimeException
+import kotlin.math.log
 
 
-@ControllerAdvice
-@RestController
+@RestControllerAdvice
 class GlobalExceptionHandler {
-   // @ResponseStatus(HttpStatus.BAD_REQUEST)
-    //@ExceptionHandler()
-  //  public handleException()
+    @ExceptionHandler(value = [RuntimeException::class])
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun exception404(e : RuntimeException): String {
+        return "404 NOT FOUND \ncheck URI again "
+    }
 
 }

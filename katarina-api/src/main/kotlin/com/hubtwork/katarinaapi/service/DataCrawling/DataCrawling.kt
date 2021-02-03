@@ -1,5 +1,6 @@
 package com.hubtwork.katarinaapi.service.DataCrawling
 
+import com.hubtwork.katarinaapi.Object.DataCrawlingObjects
 import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserDTO
 import com.hubtwork.katarinaapi.dto.riotapi.DataCrawling.UserWithMatchDTO
 import org.springframework.stereotype.Service
@@ -7,8 +8,23 @@ import org.springframework.stereotype.Service
 @Service
 class DataCrawling(private val dataCrawlingService: DataCrawlingService ) {
 
+    var objects : DataCrawlingObjects = DataCrawlingObjects()
+    fun dataCrawling(accountId : String)
+    {
+        val matchIdList : List<Long> = dataCrawlingService.getMatchByAccountId(accountId)
 
-    fun dataCrawling(userInfos: MutableList<UserDTO>, userWithMatch: MutableList<UserWithMatchDTO>, isFirst: Boolean) {
+        dataCrawlingService.getUserInfoInMatchList(matchIdList).forEach{
+            objects.userInfos?.add(it)
+        }
+        dataCrawlingService.getUserWithMatchInMatchList(matchIdList).forEach{
+            objects.userWithMatch?.add(it)
+        }
+
+    }
+
+}
+
+  /*  fun dataCrawling(userInfos: MutableList<UserDTO>, userWithMatch: MutableList<UserWithMatchDTO>, isFirst: Boolean) {
 
 
         if (isFirst) {
@@ -50,5 +66,4 @@ class DataCrawling(private val dataCrawlingService: DataCrawlingService ) {
             dataCrawling(userInfos , userWithMatch, false)
         }
 
-    }
-}
+    }*/
