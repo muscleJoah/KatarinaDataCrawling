@@ -11,13 +11,13 @@ class DataCrawling(private val dataCrawlingService: DataCrawlingService ) {
     var objects : DataCrawlingObjects = DataCrawlingObjects()
     fun dataCrawling(accountId : String)
     {
-        val matchIdList : List<Long> = dataCrawlingService.getMatchByAccountId(accountId)
+        val matchIdList : List<Long> = dataCrawlingService.getAllOfMatchByAccountId(accountId)
 
-        dataCrawlingService.getUserInfoInMatchList(matchIdList).forEach{
-            objects.userInfos?.add(it)
-        }
         dataCrawlingService.getUserWithMatchInMatchList(matchIdList).forEach{
             objects.userWithMatch?.add(it)
+        }
+        dataCrawlingService.getUserInfoInMatchList(matchIdList).forEach{
+            objects.userInfos?.add(it)
         }
 
     }

@@ -118,10 +118,14 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
 
 
     @GetMapping("/getmatchaccountid/{encryptedaccountid}")
-    fun getMatchByAccountId(@PathVariable("encryptedaccountid") encryptedAccountId:String): ResponseEntity<MatchlistDTO> {
+    fun getMatchListByAccountId(@PathVariable("encryptedaccountid") encryptedAccountId:String): ResponseEntity<MatchlistDTO> {
         val matchlistbyaccountid = riotApiService.getMatchListByAccountId(encryptedAccountId).body
         return ResponseEntity(matchlistbyaccountid, HttpStatus.OK)
     }
+
+    @GetMapping("/getmatchaccountidindex/{encryptedaccountid}/{beginindex}")
+    fun getMatchListByAccountIdWithIndex(@PathVariable("encryptedaccountid") encryptedAccountId: String , @PathVariable("beginindex") beginIndex: Int )
+    : ResponseEntity<MatchlistDTO> = riotApiService.getMatchListByAccountIdWithIndex(encryptedAccountId,beginIndex)
 
     @GetMapping("/getsummonerbyname/{summonername}")
     fun getSummonerByName(@PathVariable("summonername") summonerName : String): ResponseEntity<SummonerDTO> {
@@ -188,7 +192,7 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
 
 
     @GetMapping("datacrawlingservice/getmatchlist")
-    fun getMatchListByAccountId(){
+    fun getMatchListByAccountIdList(){
         dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(dataCrawlingService.getLeagueSummonerIdList(challengerLeagueList)))
         //dataCrawlingService.getMatchByAccountIdList(dataCrawlingService.getAccountIdBySummonerIdList(summonerIdList))
     }
@@ -212,13 +216,22 @@ class KatarinaController(private val katarinaApiService: KatarinaApiService , pr
         return ResponseEntity(temp,HttpStatus.OK)
     }
 
+    @GetMapping("datacrawlingservice/getallofmatchid/{encryptedaccountid}")
+    fun getAllOfMatchListByAccountId(@PathVariable("encryptedaccountid") encryptedAccountId: String) {
+        val matchIdList = dataCrawlingService.getAllOfMatchByAccountId(encryptedAccountId)
+        var count : Int = 1
+        matchIdList.forEach{
+            println( "$count ---  $it")
+            count++
+        }
+    }
 
     @GetMapping("datacrawlingservice/datacrawling")
     fun dataCrawling(){
         var userWithMatch = mutableListOf<UserWithMatchDTO>()
         var userInfos= mutableListOf<UserDTO>()     
 
-        dataCrawling.dataCrawling("TRbDETdnv0Prg86D0n5afVUzGZzKM3GqZZA1Kx2VqHk")
+        dataCrawling.dataCrawling("WRoqvzMyEQ6XfIXPqSHBH_ee7V2FR7jse0MtCGhi9FTvYp0")
     }
 }
 

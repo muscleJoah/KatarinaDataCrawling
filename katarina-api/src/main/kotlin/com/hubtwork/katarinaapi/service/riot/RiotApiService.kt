@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.retry.support.RetryTemplate
 import org.springframework.stereotype.Service
+import org.springframework.web.client.HttpServerErrorException
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
 import org.springframework.web.reactive.function.client.WebClient
@@ -33,7 +34,7 @@ import java.lang.RuntimeException
 import java.time.LocalDateTime
 
 @Service
-class RiotApiService(private val webClient: WebClient, private val gson: Gson , private val restTemplate : RestTemplate, private val retryTemplate: RetryTemplate)
+class RiotApiService(private val webClient: WebClient, private val gson: Gson , private val restTemplate : RestTemplate, private val retryTemplate: RetryTemplate )
     : ChampionV3, LeagueV4, LolStatusV4, MatchV4, SummonerV4
 {
 
@@ -65,6 +66,9 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
         const val match_by_matchId = "/lol/match/v4/matches/"
         const val match_by_accountId = "/lol/match/v4/matchlists/by-account/"
         const val match_timeline_by_matchId = "/lol/match/v4/timelines/by-match/"
+
+        //
+        const val begin_index = "?beginIndex="
 
         fun httpHeader():HttpHeaders {
             val header = HttpHeaders()
@@ -120,8 +124,15 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
 
 
     override fun getMatchById(matchId: Long) : ResponseEntity<MatchDTO> =
-        restTemplate.exchange("https://$platform$match_by_matchId$matchId",HttpMethod.GET,null, typeReference<MatchDTO>())
-        //restTemplate.getForObject("https://$platform$match_by_matchId$matchId", MatchDTO::class)
+        retryTemplate.execute<ResponseEntity<MatchDTO>,HttpServerErrorException> {
+            restTemplate.exchange(
+                "https://$platform$match_by_matchId$matchId",
+                HttpMethod.GET,
+                null,
+                typeReference<MatchDTO>()
+
+            )
+        }//restTemplate.getForObject("https://$platform$match_by_matchId$matchId", MatchDTO::class)
 
     override fun getMatchTimelineById(matchId: Long) : ResponseEntity<MatchTimelineDTO> =
         restTemplate.exchange("https://$platform$match_timeline_by_matchId$matchId",HttpMethod.GET,null, typeReference<MatchTimelineDTO>())
@@ -134,6 +145,10 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
         }
     }
         //restTemplate.getForObject("https://$platform$match_by_accountId$encryptedAccountId",MatchlistDTO::class)
+
+    override fun getMatchListByAccountIdWithIndex(encryptedAccountId:String, beginIndex : Int) : ResponseEntity<MatchlistDTO> =
+        restTemplate.exchange("https://$platform$match_by_accountId$encryptedAccountId$begin_index$beginIndex",HttpMethod.GET,null,typeReference<MatchlistDTO>())
+
 
     override fun getSummonerByName(summonerName: String) : SummonerDTO? =
         restTemplate.getForObject("https://$platform$summoner_by_name$summonerName" , SummonerDTO::class)
@@ -149,7 +164,6 @@ class RiotApiService(private val webClient: WebClient, private val gson: Gson , 
     override fun getSummonerBySummonerId(encryptedSummonerId: String) : ResponseEntity<SummonerDTO> =
         restTemplate.exchange("https://$platform$summoner_by_summonerId$encryptedSummonerId",HttpMethod.GET,null, typeReference<SummonerDTO>())
         //restTemplate.getForObject("https://$platform$summoner_by_summonerId$encryptedSummonerId", SummonerDTO::class)
-
 
 
 

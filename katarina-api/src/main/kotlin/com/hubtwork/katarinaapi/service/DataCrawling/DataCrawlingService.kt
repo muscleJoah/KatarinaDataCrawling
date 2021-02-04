@@ -153,6 +153,38 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
         }
         return matchIdList.distinct()
     }
+    override fun getAllOfMatchByAccountId(accountId:String) : MutableList<Long>{
+        val matchIdList = mutableListOf<Long>()
+        var beginIndex = 0
+        while(true){  println("beginIndex : $beginIndex ")
+            var currentMatchList = riotApiService.getMatchListByAccountIdWithIndex(accountId, beginIndex)
+            if(currentMatchList != null) {
+                val matches = currentMatchList.body!!.matches
+                if (matches != null) {
+                    if (matches.isEmpty()) break
+                    else matches.filter {
+                        it.queue == 325 // ALL_RANDOM
+                                || it.queue == 900    // ALL_RANDOM_URF
+                                || it.queue == 1010   // ALL_RANDOM_URF_SNOW
+                                || it.queue == 430    //BLIND_PICK
+                                || it.queue == 400    // NORMAL DRAFT
+                                || it.queue == 420    // RANKED SOLO
+                                || it.queue == 440    // RANKED FLEX
+                                || it.queue == 76     // URF
+                                || it.queue == 450     // ARAM
+                                || it.queue == 78     // ARAM ONEFORALL MIRROR MATCH
+                                || it.queue == 920    // ARAM POROKING
+
+                    }.forEach {
+                        matchIdList.add(it.gameId)
+                    }
+                }
+                beginIndex+=100
+                Thread.sleep(1000)
+            }
+        }
+        return matchIdList
+    }
 
     override fun getMatchByAccountIdList(accountIdList : List<String>): List<Long> {
         var matchIdList = mutableListOf<Long>()
@@ -194,10 +226,11 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
                 else{
                 var temp: UserDTO = UserDTO(it.player.summonerName, it.player.summonerId, it.player.accountId, it.player.platformId)
                 usersInMatch.add(temp)
-                Thread.sleep(1200)
+
                 println(temp)
             }
             }
+            Thread.sleep(1200)
         }
 
         return usersInMatch.distinct()
@@ -216,8 +249,9 @@ class DataCrawlingService(private val riotApiService: RiotApiService, private va
                 if(it.player.accountId != null)
                 participantIds.add(it.player.accountId)
                 println("${it.player.accountId}")
-                Thread.sleep(1000)
+
             }
+            Thread.sleep(1000)
             userWithMatch.add(UserWithMatchDTO(it, participantIds))
 
 

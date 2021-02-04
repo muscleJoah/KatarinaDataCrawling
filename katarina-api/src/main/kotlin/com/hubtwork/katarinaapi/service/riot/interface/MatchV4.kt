@@ -23,6 +23,6 @@ interface MatchV4 {
      *
      */
     fun getMatchListByAccountId(encryptedAccountId: String):  ResponseEntity<MatchlistDTO> // 일부러 nullable 뻇습니다.
-
+    fun getMatchListByAccountIdWithIndex(encryptedAccountId: String , beginIndex: Int) : ResponseEntity<MatchlistDTO>
 
 }

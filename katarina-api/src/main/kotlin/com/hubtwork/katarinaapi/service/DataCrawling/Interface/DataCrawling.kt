@@ -12,4 +12,7 @@ interface DataCrawling {
     fun getMatchListByUserInfo(usersInMatch : List<UserDTO>): List<Long>
     fun getUserWithMatchInMatchList(matchIdList: List<Long>) : List<UserWithMatchDTO>
     fun getMatchByAccountId(matchId : String) : List<Long>
+    fun getAllOfMatchByAccountId(accountId:String) : MutableList<Long>
+
+
 }
