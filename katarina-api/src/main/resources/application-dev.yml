@@ -1,3 +1,25 @@
 
 riot:
-  api-key: "RGAPI-b0217aaa-526b-46e5-b056-d272d29891a6"
+  api-key: "RGAPI-36b1f6fb-85dc-4f63-b32e-f574840e8abd"
+
+logging:
+  level:
+    root: info
+
+spring:
+  datasource:
+    matcher:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://localhost:3306/matcher?serverTimezone=UTC&characterEncoding=UTF-8
+      username: root
+      password: "0000"
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

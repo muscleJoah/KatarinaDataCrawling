@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.4.21"
     kotlin("plugin.spring") version "1.4.21"
+    kotlin("plugin.jpa") version  "1.4.21"
 }
 
 group = "com.hubtwork"
@@ -39,6 +40,13 @@ dependencies {
     implementation("org.springframework.retry:spring-retry")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    //jpa
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+
+
 }
 
 tasks.withType<KotlinCompile> {
@@ -51,3 +59,4 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
