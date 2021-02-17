@@ -24,23 +24,12 @@ import javax.sql.DataSource
 class JPAConfig {
     @Primary
     @Bean
-    @ConfigurationProperties("spring.datasource.matcher")
-    fun dataSource(): DataSource {
-        val dataSource = DataSourceBuilder.create().type(HikariDataSource::class.java).build()
-
-        // UTF-8 :: 한글 문자열 처리
-        dataSource.connectionInitSql = "SET NAMES utf8mb4"
-
-        return dataSource
-    }
-
-    @Primary
-    @Bean
     fun entityManagerFactory(
+        datasource: DataSource,
         builder: EntityManagerFactoryBuilder
     ): LocalContainerEntityManagerFactoryBean {
         return builder
-            .dataSource(this.dataSource())
+            .dataSource(datasource)
             .packages("com.hubtwork.katarinaapi.jpa")
             .persistenceUnit("katarina")
             .build()
@@ -48,7 +37,7 @@ class JPAConfig {
 
     @Primary
     @Bean
-    fun transactionManager(builder: EntityManagerFactoryBuilder): JpaTransactionManager {
-        return JpaTransactionManager(entityManagerFactory(builder).`object`!!)
+    fun transactionManager(entityManagerFactory: LocalContainerEntityManagerFactoryBean): JpaTransactionManager {
+        return JpaTransactionManager(entityManagerFactory.`object`!!)
     }
 }

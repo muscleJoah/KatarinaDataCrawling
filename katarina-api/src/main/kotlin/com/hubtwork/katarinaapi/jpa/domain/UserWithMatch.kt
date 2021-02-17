@@ -4,15 +4,15 @@ import javax.persistence.*
 
 
 @Entity
-@Table(name = "userwithmatchsex")
+@Table(name = "userwithmatch")
 class UserWithMatch(
     matchId : Long,
     accountId : String)
 {
     @Id
-    @Column(name = "matchIdsex")
+    @Column(name = "matchId")
     var matchId: Long = matchId
 
-    @Column(name = "accountIdsex")
+    @Column(name = "accountId")
     var accountId : String = accountId
 }

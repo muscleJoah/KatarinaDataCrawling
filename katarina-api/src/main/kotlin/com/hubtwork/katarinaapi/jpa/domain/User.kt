@@ -4,22 +4,22 @@ import javax.persistence.*
 
 
 @Entity
-@Table(name = "usersex")
+@Table(name = "user")
 class User(summonerName : String,
            summonerId : String,
            accountId : String,
            platformId : String) {
 
     @Id
-    @Column(name = "accountIdsex")
+    @Column(name = "accountId")
     var accountId: String = accountId
 
-    @Column(name = "summonerNamesex")
+    @Column(name = "summonerName")
     var summonerName: String = summonerName
 
-    @Column(name = "platformIdsex")
+    @Column(name = "platformId")
     var platformId: String = platformId
 
-    @Column(name = "summonerIdsex")
+    @Column(name = "summonerId")
     var summonerId : String = summonerId
 }

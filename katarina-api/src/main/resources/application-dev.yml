@@ -1,6 +1,6 @@
 
 riot:
-  api-key: "RGAPI-36b1f6fb-85dc-4f63-b32e-f574840e8abd"
+  api-key: "RGAPI-9b8586cc-0140-45b9-8ca5-3d7b990bf48e"
 
 logging:
   level:
@@ -8,11 +8,11 @@ logging:
 
 spring:
   datasource:
-    matcher:
-      driver-class-name: org.mariadb.jdbc.Driver
-      jdbc-url: jdbc:mariadb://localhost:3306/matcher?serverTimezone=UTC&characterEncoding=UTF-8
-      username: root
-      password: "0000"
+    connection-init-sql: "SET NAMES utf8mb4"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/matcher?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: "0000"
   jpa:
     generate-ddl: true
     hibernate:
