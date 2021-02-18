@@ -1,21 +1,26 @@
 package com.hubtwork.katarinaapi.service.DataCrawling
 
 import com.hubtwork.katarinaapi.Object.DataCrawlingObjects
+import com.hubtwork.katarinaapi.service.batch.MatcherService
 import org.springframework.stereotype.Service
+import javax.transaction.Transactional
 
 @Service
-class DataCrawling(private val dataCrawlingService: DataCrawlingService ) {
+class DataCrawling(private val dataCrawlingService: DataCrawlingService , private val matcherService: MatcherService ) {
 
     var objects : DataCrawlingObjects = DataCrawlingObjects()
+
+    @Transactional
     fun dataCrawling(accountId : String)
     {
         val matchIdList : List<Long> = dataCrawlingService.getAllOfMatchByAccountId(accountId)
-
+        dataCrawlingService.getUserInfoInMatchList(matchIdList).forEach{
+            matcherService.insertUser(it.accountId, it.summonerName , it.platformId , it.summonerId )
+            println("넣어어어어어!!")
+            objects.userInfos?.add(it)
+        }
         dataCrawlingService.getUserWithMatchInMatchList(matchIdList).forEach{
             objects.userWithMatch?.add(it)
-        }
-        dataCrawlingService.getUserInfoInMatchList(matchIdList).forEach{
-            objects.userInfos?.add(it)
         }
 
     }
