@@ -10,6 +10,10 @@ class UserWithMatch(
     accountId : String)
 {
     @Id
+    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id : Long = 0
+
     @Column(name = "matchId")
     var matchId: Long = matchId
 
